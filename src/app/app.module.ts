@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import{ ReactiveFormsModule} from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ViewtaskComponent } from './viewtask/viewtask.component';
@@ -16,7 +16,13 @@ import{HttpClientModule} from '@angular/common/http';
 import{RouterModule} from '@angular/router';
 import { AdduserComponent } from './adduser/adduser.component';
 import { AddprojectComponent } from './addproject/addproject.component';
-import { EdituserComponent } from './edituser/edituser.component'
+import { EdituserComponent } from './edituser/edituser.component';
+import{MatDialogModule} from '@angular/material';
+import { UserdialogComponent } from './dialogs/userdialog/userdialog.component';
+import { ProjectdialogComponent } from './dialogs/projectdialog/projectdialog.component';
+import { ParenttaskdialogComponent } from './dialogs/parenttaskdialog/parenttaskdialog.component'
+
+
 
 @NgModule({
   declarations: [
@@ -30,9 +36,15 @@ import { EdituserComponent } from './edituser/edituser.component'
     AdduserComponent,
     AddprojectComponent,
     EdituserComponent,
+    UserdialogComponent,
+    ProjectdialogComponent,
+    ParenttaskdialogComponent,
     
   
   ],
+  providers:[
+  ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,6 +52,8 @@ import { EdituserComponent } from './edituser/edituser.component'
     BrowserAnimationsModule,
     MatSliderModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    MatDialogModule,
     RouterModule.forRoot([
       {path: 'edit/:id' , component :EdittaskComponent},
       {path: 'add' , component :AddtaskComponent},
@@ -50,7 +64,14 @@ import { EdituserComponent } from './edituser/edituser.component'
       
     ])
   ],
-  providers: [],
+  entryComponents:
+  [
+    UserdialogComponent,
+    ProjectdialogComponent,
+    ParenttaskdialogComponent,
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+ 

@@ -5,48 +5,57 @@
                         <div class="form-group row">
                                 <label for="project" class="col-sm-1 col-form-label">Project:</label>
                                 <div class="col-sm-3">
-                                        <input type="text" style="background-color: #eee" class="form-control" id="projectName" name="projectName"[ngModel] = "project.projectName"/>
+                                        <input type="text" style="background-color: #eee" class="form-control" id="projectName" name="projectName"[(ngModel)] = "project.projectName"/>
                                 
                         </div>
                         </div>
                         <div class="form-group row">
                                 <label for="project" class="col-sm-1 col-form-label">Start Date:</label>
                                 <div class="col-sm-3">
-                                        <input type="date" style="background-color: #eee" class="form-control" id="startDate" name="startDate"[ngModel] = "project.startDate"/>
+                                        <input type="date" style="background-color: #eee" class="form-control" id="startDate" name="startDate"[(ngModel)] = "project.startDate"/>
                                 
                         </div>
                         </div>
                         <div class="form-group row">
                                 <label for="project" class="col-sm-1 col-form-label">End Date:</label>
                                 <div class="col-sm-3">
-                                        <input type="date" style="background-color: #eee" class="form-control" id="endDate" name="endDate"[ngModel] = "project.endDate"/>     
+                                        <input type="date" style="background-color: #eee" class="form-control" id="endDate" name="endDate"[(ngModel)] = "project.endDate"/>     
                         </div>
                         </div>
                         <div class="form-group row">
-                                <label for="recipient-name" class="col-sm-1 col-form-label">Priority: <b>{{priority}}</b></label>
+                                <label for="recipient-name" class="col-sm-1 col-form-label">Priority: <b>{{project.priority}}</b></label>
                                 <div class="col-sm-3">
-                                <mat-slider [(ngModel)]="priority" class="form-control" id="priority" name="priority" min="0" max="30" step="1" value="1"></mat-slider>
+                                <mat-slider [(ngModel)]="project.priority" class="form-control" id="priority" name="priority" min="0" max="30" step="1" value="1"></mat-slider>
                                 </div>
                                 </div>
-                    
                                 <div class="form-group row">
-                                        <label for="project" class="col-sm-1 col-form-label">Manager:</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        
-                                            <div class="col-sm-2" style="text-align: center">
-                                                    <button (click)="openModal('custom-modal-1')">Search</button>
-                                            </div>
-                                        </div>        
-                            </div>
-                        </form>
-                        </div>
-                        </div>
+                                <label for="project" class="col-sm-1 col-form-label">Manager:</label>
+                                <div class="col-sm-3">
+                                 <input type="text" style="background-color: #eee" class="form-control" id="searchTerm" name="searchTerm" [(ngModel)] = "searchTerm"/>
+                                </div>
+                                <div class="col-sm-2">
+                                 <button class="btn btn-secondary" (click)="searchMangers(searchTerm); openDialog()">Search</button>
+                                </div>
+                                </div>        
+                                <div class="form-group row">
+                                        <div class="col-sm-2" style="text-align: center">
+                                        <button type = "submit"  class="btn btn-primary" (click)="addProject(project)">Add Project</button>
+                                        </div>
+                                        <div class="col-sm-2">  
+                                        <button type = "reset" class="btn btn-secondary">Reset</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                                    </div>
+                                    </div>
  <div class="card">
     <div class="card-body" >
         <div class="form-group column">
                 <div class="form-group row">
           <label for="project" class="col-sm-1 col-form-label">Search :</label>
           <div class="col-sm-4">
-            <input type="text" style="background-color: #eee" class="form-control" id="taskName" name="taskName" [(ngModel)]='_taskFilter'/>
+            <input type="text" style="background-color: #eee" class="form-control" id="projectName" name="projectName" [(ngModel)]='_projectFilter'/>
           </div>
                 </div>
                 <div class="form-group row">
@@ -67,13 +76,13 @@
 <div class='table-responsive'>
     <table class='table'>
             <tbody>
-                <tr>
+                <tr *ngFor="let project of projectList | filterdata:'projectName': _projectFilter" >
                     <td >
                         <div class="card">
                             <div class="card-body" style="background-color: #eee">
-                                    <p class="card-text">Project: &nbsp;&nbsp; {{project.firstName}</p>
-                                    <p class="card-text"> No of Tasks: &nbsp;&nbsp; {{project.no of task} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed :- &nbsp;&nbsp; {{project.no of task Completed}</p>
-                                    <p class="card-text">Start Date: &nbsp;&nbsp; {{project.startDate} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End Date: &nbsp;&nbsp; {{project.endDate}</p>
+                                    <p class="card-text">Project: &nbsp;&nbsp; {{project.projectName}}</p>
+                                    <p class="card-text"> No of Tasks: &nbsp;&nbsp; 0 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Completed :- &nbsp;&nbsp; 0</p>
+                                    <p class="card-text">Start Date: &nbsp;&nbsp; {{project.startDate}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; End Date: &nbsp;&nbsp; {{project.endDate}}</p>
                                 </div> 
                             </div>
                                 </td>
@@ -81,7 +90,7 @@
                                         <h6><p style="text-align: center">Priority</p></h6>
                                         <div class="card" >
                                 <div class="card-body" style="background-color: #eee">
-                                <p class="card-text">{{project.Priority} </p> 
+                                <p class="card-text">{{project.priority}} </p> 
                                 </div>
                                 </div>
                             </td>
@@ -102,4 +111,4 @@
                             </tr>
             </tbody>
     </table>
-    </div>
+    </div> 

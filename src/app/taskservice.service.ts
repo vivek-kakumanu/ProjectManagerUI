@@ -12,6 +12,7 @@ import { IParentTask } from './interfaces/parentTask';
 })
 export class TaskService {
  
+ 
   private productUrl = 'http://localhost:8080/taskmanagementservice'
 
   constructor(private http :HttpClient) { }
@@ -53,6 +54,9 @@ export class TaskService {
   // Adding new User
   addUser(user: User): Observable<IUser> {
     return this.http.put<IUser>(this.productUrl + '/addUser', user ).pipe( map(() => user), catchError(this.handleError));
+  }
+  addProject(user: IUser): Observable<IUser> {
+    return this.http.put<IUser>(this.productUrl + '/addProject', user ).pipe( map(() => user), catchError(this.handleError));
   }
 
    // Get a task based on task id

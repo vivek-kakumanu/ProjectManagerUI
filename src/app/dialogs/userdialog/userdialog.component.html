@@ -1,0 +1,38 @@
+<div class='table-responsive'>
+    <table class='table' title="User List">
+      <thead>
+        <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Employee Id</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of data">
+             <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{user.firstName}}</p>
+            </div>
+          </div></td>
+        <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{user.lastName}}</p>
+            
+            </div>
+          </div></td>
+          <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{user.employeeId}}</p>
+            </div>
+          </div></td>
+          <td>
+            <div mat-dialog-actions>
+                <button class="btn btn-secondary" mat-button [mat-dialog-close]="user" cdkFocusInitial>select</button>
+              </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+          
