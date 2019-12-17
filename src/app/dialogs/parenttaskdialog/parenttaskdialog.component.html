@@ -1,1 +1,26 @@
-<p>parenttaskdialog works!</p>
+<div class='table-responsive'>
+    <table class='table' title="User List">
+      <thead>
+        <tr>
+          <th>Parent Task</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parent of data">
+             <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{parent.parentTask}}</p>
+            </div>
+          </div></td>
+          <td>
+            <div mat-dialog-actions>
+                <button class="btn btn-secondary" mat-button [mat-dialog-close]="parent" cdkFocusInitial>select</button>
+              </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+          
+

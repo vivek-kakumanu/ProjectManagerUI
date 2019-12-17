@@ -26,6 +26,7 @@ export class AdduserComponent implements OnInit, OnChanges {
   {
     this.taskService.addUser(user).subscribe(data => { if (data) {
       this.refresh();
+     this.user= new User();
       }
     });
   

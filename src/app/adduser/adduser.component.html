@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <form class="form-horizontal" #userForm="ngForm" (ngSubmit)="userForm.reset()" >
+        <form class="form-horizontal" #userForm="ngForm">
             <div class="form-group column" style="margin: auto;">
                     <div class="form-group row">
                     <label for="user" class="col-sm-2 col-form-label">First Name:</label>
@@ -25,7 +25,7 @@
                         <button type = "submit"  class="btn btn-primary" (click)="addUser(user)">Add User</button>
                         </div>
                         <div class="col-sm-2">  
-                        <button type = "reset" class="btn btn-secondary">Reset</button>
+                        <button type = "reset" class="btn btn-secondary" (click)="userForm.reset()">Reset</button>
                         </div>
                         </div>
                     </div>

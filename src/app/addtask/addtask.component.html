@@ -1,18 +1,16 @@
 <div class="card">
     <div class="card-body">
-        <form class="form-horizontal" #taskForm="ngForm" (ngSubmit)="taskForm.reset()" >
+        <form class="form-horizontal" #taskForm="ngForm">
             <div class="form-group column" style="margin: auto;">
               <div class="form-group row">
-                <label for="task" class="col-sm-1 col-form-label">Project:</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                 <select class="col-sm-2" name="project" id="project" style="background-color: #eee">
-                  <option *ngFor="let project of projectList;" [value]="task.project"> 
-                    {{project.projectName}}
-                  </option>
-                 </select>
-                    <div class="col-sm-2" style="text-align: center">
-                    <button class="btn btn-secondary"(click)="getProjects()">Search</button>
-                    </div>
-                  </div>
+                <label for="project" class="col-sm-1 col-form-label">Porject:</label>
+                <div class="col-sm-3">
+                 <input type="text" style="background-color: #eee" class="form-control" id="searchProjectTerm" name="searchProjectTerm" [(ngModel)] = "searchProjectTerm"/>
+                </div>
+                <div class="col-sm-2">
+                 <button class="btn btn-secondary" (click)="searchProjects(searchProjectTerm); openProjectDialog()">Search</button>
+                </div>
+                </div>   
                     <div class="form-group row">
                     <label for="task" class="col-sm-1 col-form-label">Task:</label>
                     <div class="col-sm-3">
@@ -26,16 +24,14 @@
                     </div>
                     </div>
                     <div class="form-group row">
-                    <label for="task" class="col-sm-1 col-form-label">Parent Task:</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <select [(ngModel)]='id' class="col-sm-2" name="parentTask" id="parentTask" style="background-color: #eee">
-                      <option *ngFor="let parent of parentList; let i = index" [value]='i' > 
-                        {{parentList[i].parentTask}} 
-                      </option>
-                     </select>
-                        <div class="col-sm-2" style="text-align: center">
-                        <button class="btn btn-secondary"(click)="getParents()">Search</button>
-                        </div>
-                    </div>
+                      <label for="project" class="col-sm-1 col-form-label">ParentTask:</label>
+                      <div class="col-sm-3">
+                       <input type="text" style="background-color: #eee" class="form-control" id="searchParentTerm" name="searchParentTerm" [(ngModel)] = "searchParentTerm"/>
+                      </div>
+                      <div class="col-sm-2">
+                       <button class="btn btn-secondary" (click)="searchParentTask(searchParentTerm); openParentDialog()">Search</button>
+                      </div>
+                      </div>   
                     <div class="form-group row">
                     <label for="task" class="col-sm-1 col-form-label">Start Date:</label>
                     <div class="col-sm-3">
@@ -49,22 +45,20 @@
                     </div>
                     </div>
                     <div class="form-group row">
-                      <label for="task" class="col-sm-1 col-form-label">User:</label> &nbsp;&nbsp;&nbsp;&nbsp;
-                      <select class="col-sm-2" name="parentTask" id="parentTask" style="background-color: #eee">
-                        <option *ngFor="let user of userList; let i = index" [value]='userList[i]'> 
-                          {{userList[i].employeeId}}
-                        </option>
-                       </select>
-                          <div class="col-sm-2" style="text-align: center">
-                          <button class="btn btn-secondary"(click)="getUsers()">Search</button>
-                          </div>
+                      <label for="project" class="col-sm-1 col-form-label">User:</label>
+                      <div class="col-sm-3">
+                       <input type="text" style="background-color: #eee" class="form-control" id="searchUserTerm" name="searchUserTerm" [(ngModel)] = "searchUserTerm"/>
                       </div>
+                      <div class="col-sm-2">
+                       <button class="btn btn-secondary" (click)="searchUser(searchUserTerm); openDialog()">Search</button>
+                      </div>
+                      </div>   
                     <div class="form-group row">
                     <div class="col-sm-2" style="text-align: center">
-                    <button type = "submit"  class="btn btn-primary"(click)="addTask(task)">Add Task</button>
+                    <button type = "submit"  class="btn btn-secondary"(click)="addTask(task);">Add Task</button>
                     </div>
                     <div class="col-sm-2">  
-                    <button type = "reset" class="btn btn-secondary">Reset</button>
+                    <button type = "reset" class="btn btn-secondary" (click)="taskForm.reset()">Reset</button>
                     </div>
                     </div>
                   </div>

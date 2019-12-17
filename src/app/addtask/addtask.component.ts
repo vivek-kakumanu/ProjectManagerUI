@@ -5,6 +5,10 @@ import { TaskService } from '../taskservice.service';
 import { Project, IProject } from '../interfaces/project';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser, User } from '../interfaces/user';
+import { MatDialog } from '@angular/material';
+import { UserdialogComponent } from '../dialogs/userdialog/userdialog.component';
+import { ProjectdialogComponent } from '../dialogs/projectdialog/projectdialog.component';
+import { ParenttaskdialogComponent } from '../dialogs/parenttaskdialog/parenttaskdialog.component';
 
 
 @Component({
@@ -23,21 +27,53 @@ export class AddtaskComponent implements OnInit {
   parentList: IParentTask[];
   userList: IUser[];
   id : number;
+  searchUserTerm : string ="";
+  searchParentTerm : String ="";
+  searchProjectTerm : String ="";
+  user: User;
+  project: Project;
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public dialog: MatDialog,private taskService: TaskService, private route: ActivatedRoute, private router: Router) { }
 
 
   ngOnInit() {
+    this.taskService.getUser().subscribe
+    (
+      {
+        next: users => this.userList = users,
+        error: err => this.errorMessage = err
+      });
+      this.taskService.getProjects().subscribe
+    (
+      {
+        next: projects => this.projectList = projects,
+        error: err => this.errorMessage = err
+      });
+      this.taskService.getParentTask().subscribe
+    (
+      {
+        next: parents => this.parentList = parents,
+        error: err => this.errorMessage = err
+      });
    
   }
-  addTask(user : Task)
+  addTask(task : Task)
   {
-  user.parentTask = new IParentTask(this.parentList[this.id].parentId, this.parentList[this.id].parentTask);
-  console.log(this.parentList[this.id]);  
-  console.log(user.parentTask.parentTask,user.priority); 
+    if(this.user.userId!=null){
+  task.project = this.project;
+  task.parentTask = new IParentTask(this.parentTask.parentId, this.searchParentTerm);
+  this.user.task=task;
+  this.taskService.addTask(this.user).subscribe(data => { if (data) {
+    this.task = new Task();
+    this.searchParentTerm="";
+    this.searchProjectTerm="";
+    this.searchUserTerm="";
+    }
+  });
+}
   }
 
-  getProjects()
+  searchProjects(searchProjectTerm : string)
   {
     this.taskService.getProjects().subscribe
     (
@@ -45,8 +81,23 @@ export class AddtaskComponent implements OnInit {
         next: projects => this.projectList = projects,
         error: err => this.errorMessage = err
       });
+      if(searchProjectTerm != null)
+      {
+        var term = searchProjectTerm.toLocaleLowerCase();
+        var results : IProject[] = this.projectList
+        this.projectList = results.filter( str => {
+          return str.projectName.toLowerCase().includes(term.toLowerCase());
+        });
+      }
+      this.taskService.getParentTask().subscribe
+    (
+      {
+        next: parents => this.parentList = parents,
+        error: err => this.errorMessage = err
+      });
+      
   }
-  getParents()
+  searchParentTask(searchParentTerm : string)
   {
     this.taskService.getParentTask().subscribe
     (
@@ -54,8 +105,18 @@ export class AddtaskComponent implements OnInit {
         next: parents => this.parentList = parents,
         error: err => this.errorMessage = err
       });
+      if(searchParentTerm != null)
+      {
+        var term = searchParentTerm.toLocaleLowerCase();
+        var results : IParentTask[] = this.parentList;
+        this.parentList = results.filter( str => {
+          return str.parentTask.toLowerCase().includes(term.toLowerCase());
+        });
+      }
+      
   }
-  getUsers()
+
+  searchUser(searchUserTerm :any)
   {
     this.taskService.getUser().subscribe
     (
@@ -63,6 +124,58 @@ export class AddtaskComponent implements OnInit {
         next: users => this.userList = users,
         error: err => this.errorMessage = err
       });
+      if(searchUserTerm != null)
+      {
+        var term = searchUserTerm.toLocaleLowerCase();
+        var results : IUser[] = this.userList;
+        this.userList = results.filter( str => {
+          return str.firstName.toLowerCase().includes(term.toLowerCase());
+        });
+      }
+    }
+      openDialog(): void {
+        const dialogRef = this.dialog.open(UserdialogComponent, {
+          data : this.userList
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          console.log(result);
+          this.user = result;
+          if(result!=null){
+          this.searchUserTerm=this.user.firstName+" "+this.user.lastName;
+          }
+        });
+      } 
 
-  }
+      openProjectDialog(): void {
+        const dialogRef = this.dialog.open(ProjectdialogComponent, {
+          data : this.projectList
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          console.log(result);
+          this.project = result;
+          if(result!=null){
+          this.searchProjectTerm=this.project.projectName;
+          }
+        });
+      } 
+
+      openParentDialog(): void {
+        const dialogRef = this.dialog.open(ParenttaskdialogComponent, {
+          data : this.parentList
+        });
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log('The dialog was closed');
+          console.log(result);
+          this.parentTask = result;
+          if(result!=null){
+          this.searchParentTerm=this.parentTask.parentTask;
+          }
+        });
+      } 
+
   }

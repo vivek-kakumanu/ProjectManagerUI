@@ -1,1 +1,45 @@
-<p>projectdialog works!</p>
+<div class='table-responsive'>
+    <table class='table' title="User List">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Priority</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of data">
+             <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{project.projectName}}</p>
+            </div>
+          </div></td>
+        <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{project.startDate |  date : 'dd-MM-yyyy'}}</p>
+            
+            </div>
+          </div></td>
+          <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{project.endDate |  date : 'dd-MM-yyyy'}}</p>
+            </div>
+          </div></td>
+          <td><div class="card">
+            <div class="card-body" style="background-color: #eee">
+              <p class="card-text">{{project.priority}}</p>
+            </div>
+          </div></td>
+          <td>
+            <div mat-dialog-actions>
+                <button class="btn btn-secondary" mat-button [mat-dialog-close]="project" cdkFocusInitial>select</button>
+              </div>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+          </div>
+          
+

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { ParentTask, IParentTask } from 'src/app/interfaces/parentTask';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-parenttaskdialog',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ParenttaskdialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<ParenttaskdialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: IParentTask[]) {}
 
   ngOnInit() {
   }

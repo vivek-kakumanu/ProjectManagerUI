@@ -20,7 +20,7 @@ export class AddprojectComponent implements OnInit {
   searchTerm: string ="";
   userList: IUser[];
   errorMessage: any;
-  user: IUser;
+  user: User;
   projectList: IProject[];
   _projectFilter: string;
 
@@ -33,7 +33,9 @@ export class AddprojectComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       this.user = result;
-      this.searchTerm=this.user.firstName+" "+this.user.lastName;
+      if(result!=null){
+        this.searchTerm=this.user.firstName+" "+this.user.lastName;
+        }
     });
   } 
 
@@ -52,6 +54,9 @@ export class AddprojectComponent implements OnInit {
         next: project => this.projectList = project,
         error: err => this.errorMessage = err
       });
+      this.project.startDate= new Date();
+      this.project.endDate= new Date();
+      this.project.endDate.setDate(this.project.endDate.getDate()+1);
   }
 
   searchMangers(searchTerm : any)

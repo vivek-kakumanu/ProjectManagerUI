@@ -42,8 +42,8 @@ export class TaskService {
   }
 
   // Adding new task
-  addTask(task: Task): Observable<ITask> {
-    return this.http.post<ITask>(this.productUrl + '/addtask', task ).pipe( map(() => task), catchError(this.handleError));
+  addTask(user: User): Observable<IUser> {
+    return this.http.put<IUser>(this.productUrl + '/addtask', user ).pipe( map(() => user), catchError(this.handleError));
   }
 
   // Adding new task
