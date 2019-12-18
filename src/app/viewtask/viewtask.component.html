@@ -1,39 +1,30 @@
-
-
-  <div>
-      <div class="form-group row">
-        <label for="task" class="col-sm-1 col-form-label">Task:</label>
-        <div class="col-sm-3">
-          <input type="text" style="background-color: #eee" class="form-control" id="taskName" name="taskName" [(ngModel)]='_taskFilter'/>
-        </div>
-    
-        <label for="parentTask" class="col-sm-1 col-form-label">Parent Task:</label>
-        <div class="col-sm-3">
-          <input type="text"style="background-color: #eee" id="parentTask" class="form-control" name="parentTask" [(ngModel)]='parentTaskFilter'/>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="priorityFrom" class="col-sm-1 col-form-label">Priority From:</label>
-        <div class="col-sm-2">
-        <input type="number"style="background-color: #eee" min="0" max="30" class="form-control" id="priorityFrom" name="priorityFrom"[(ngModel)]='priorityFrom'/>
-        </div>
-    
-        <label for="priorityTo" class="col-sm-0 col-form-label">Priority To:</label>
-        <div class="col-sm-2">
-        <input type="number" style="background-color:  #eee" min="0" max="30" class="form-control" id="priorityTo" name="priorityTo"[(ngModel)]='priorityTo'/>
-        </div>
-    
-        <label for="startDate" class="col-sm-0 col-form-label">Start Date:</label>
-        <div class="col-sm-2">
-            <input type="date" style="background-color: #eee" placeholder="yyyy-mm-dd"id="startDate" class="form-control" name="startDate" [(ngModel)]='start_Date'/>
-            </div>
-    
-        <label for="endDate" class="col-sm-0 col-form-label">End Date:</label>
-        <div class="col-sm-2">
-        <input type="date"style="background-color: #eee" placeholder="yyyy-mm-dd" id="endDate" class="form-control" name="endDate" [(ngModel)]='end_Date'/>
-        </div>
-    </div>
+<div class="card">
+  <div class="card-body" >
+      <div class="form-group column">
+        <div class="form-group row">
+          <label for="project" class="col-sm-1 col-form-label">Project:</label>
+          <div class="col-sm-3">
+           <input type="text" style="background-color: #eee" class="form-control" id="project" name="project" [(ngModel)] = "searchProjectTerm"/>
+          </div>
+          <div class="col-sm-2">
+           <button class="btn btn-secondary" (click)="searchProjects(searchProjectTerm); openProjectDialog()">Search</button>
+          </div>
+          </div>   
+              <div class="form-group row">
+                      <label for="sort" class="col-sm-1 col-form-label">Sort Task By:</label>
+                      <div class="col-sm-2">  
+                        <button  class="btn btn-secondary" (click)="sortByStartDate()">Start Date</button>
+                      </div>
+                      <div class="col-sm-2">  
+                      <button  class="btn btn-secondary" (click)="sortByEndDate()">End Date</button>
+                      </div>
+                      <div class="col-sm-2">  
+                      <button  class="btn btn-secondary"(click)="sortByPriority()">Priority</button>
+                      </div>
+                        <div class="col-sm-2">  
+                       <button  class="btn btn-secondary">Completed</button>
+                      </div>
+                  </div>
 
   
   <div class='table-responsive'>
@@ -50,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let task of tasksList | filterdata:'taskName': _taskFilter |filterdata:'parentTask': parentTaskFilter |filterpriority: 'priority' : priorityFrom :priorityTo | filterdate: 'startDate' :'endDate' : start_Date : end_Date">
+          <tr *ngFor="let task of tasksList | filterdata:'project': searchProjectTerm ">
                <td><div class="card">
               <div class="card-body" style="background-color: #eee">
                 <p class="card-text">{{task.taskName}}</p>

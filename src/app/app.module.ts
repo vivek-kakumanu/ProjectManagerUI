@@ -20,7 +20,8 @@ import { EdituserComponent } from './edituser/edituser.component';
 import{MatDialogModule} from '@angular/material';
 import { UserdialogComponent } from './dialogs/userdialog/userdialog.component';
 import { ProjectdialogComponent } from './dialogs/projectdialog/projectdialog.component';
-import { ParenttaskdialogComponent } from './dialogs/parenttaskdialog/parenttaskdialog.component'
+import { ParenttaskdialogComponent } from './dialogs/parenttaskdialog/parenttaskdialog.component';
+import { EditprojectComponent } from './editproject/editproject.component'
 
 
 
@@ -39,6 +40,7 @@ import { ParenttaskdialogComponent } from './dialogs/parenttaskdialog/parenttask
     UserdialogComponent,
     ProjectdialogComponent,
     ParenttaskdialogComponent,
+    EditprojectComponent,
     
   
   ],
@@ -60,7 +62,8 @@ import { ParenttaskdialogComponent } from './dialogs/parenttaskdialog/parenttask
       {path: 'view' , component :ViewtaskComponent},
       {path: 'adduser' , component :AdduserComponent},
       {path: 'project' , component :AddprojectComponent},
-      {path: 'editUser/:id' , component :EdituserComponent}
+      {path: 'editUser/:id' , component :EdituserComponent},
+      {path: 'editProject/:id' , component :EditprojectComponent}
       
     ])
   ],

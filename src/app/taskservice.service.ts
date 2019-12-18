@@ -4,13 +4,15 @@ import{HttpClient, HttpErrorResponse} from '@angular/common/http';
 import{Observable, throwError} from 'rxjs';
 import{catchError, tap, map} from 'rxjs/operators';
 import { IUser, User } from './interfaces/user';
-import { IProject } from './interfaces/project';
+import { IProject, Project } from './interfaces/project';
 import { IParentTask } from './interfaces/parentTask';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
+ 
+  
  
  
   private productUrl = 'http://localhost:8080/taskmanagementservice'
@@ -66,14 +68,25 @@ export class TaskService {
     getUserById(id: number): Observable<IUser> {
       return this.http.get<IUser>(this.productUrl + '/user/'+id).pipe(map((data => data), catchError(this.handleError)));
     }
+    getProjectById(id: number) : Observable<IProject> {
+      return this.http.get<IProject>(this.productUrl + '/project/'+id).pipe(map((data => data), catchError(this.handleError)));
+    }
+    
 
      // Adding new task
    updateTask(task: Task): Observable<ITask> {
     return this.http.put<ITask>(this.productUrl + '/updatetask', task ).pipe( map(() => task), catchError(this.handleError));
   }
 
+  getTasksByProject(project : Project): Observable<ITask[]> {
+    return this.http.put<ITask[]>(this.productUrl + '/taskByProject', project ).pipe( map((data => data), catchError(this.handleError)));
+  }
+
   updateUser(user: User) : Observable<IUser> {
     return this.http.put<IUser>(this.productUrl + '/updateUser', user ).pipe( map(() => user), catchError(this.handleError));
+  }
+  updateProject(project: Project) : Observable<IProject> {
+    return this.http.put<IProject>(this.productUrl + '/updateProject', project ).pipe( map(() => project), catchError(this.handleError));
   }
 
 }

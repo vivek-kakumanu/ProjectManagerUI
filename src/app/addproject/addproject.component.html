@@ -1,6 +1,6 @@
 <div class="card">
         <div class="card-body">
-            <form class="form-horizontal" #projectForm="ngForm" (ngSubmit)="projectForm.reset()" >
+            <form class="form-horizontal" #projectForm="ngForm">
                 <div class="form-group column" style="margin: auto;">
                         <div class="form-group row">
                                 <label for="project" class="col-sm-1 col-form-label">Project:</label>
@@ -42,7 +42,7 @@
                                         <button type = "submit"  class="btn btn-primary" (click)="addProject(project)">Add Project</button>
                                         </div>
                                         <div class="col-sm-2">  
-                                        <button type = "reset" class="btn btn-secondary">Reset</button>
+                                        <button type = "reset" class="btn btn-secondary" (click)="projectForm.reset()">Reset</button>
                                         </div>
                                         </div>
                                     </div>
@@ -55,19 +55,19 @@
                 <div class="form-group row">
           <label for="project" class="col-sm-1 col-form-label">Search :</label>
           <div class="col-sm-4">
-            <input type="text" style="background-color: #eee" class="form-control" id="projectName" name="projectName" [(ngModel)]='_projectFilter'/>
+            <input type="text" style="background-color: #eee" class="form-control" id="searchprojectName" name="searchprojectName" [(ngModel)]='_projectFilter'/>
           </div>
                 </div>
                 <div class="form-group row">
                         <label for="sort" class="col-sm-1 col-form-label">Sort By:</label>
                         <div class="col-sm-2">  
-                          <button  class="btn btn-secondary">Start Date</button>
+                          <button  class="btn btn-secondary" (click)="sortByStartDate()">Start Date</button>
                           </div>
                           <div class="col-sm-2">  
-                          <button  class="btn btn-secondary">End Date</button>
+                          <button  class="btn btn-secondary" (click)="sortByEndDate()">End Date</button>
                           </div>
                           <div class="col-sm-2">  
-                          <button  class="btn btn-secondary">Priority</button>
+                          <button  class="btn btn-secondary"(click)="sortByPriority()">Priority</button>
                           </div>
                           <div class="col-sm-2">  
                          <button  class="btn btn-secondary">Completed</button>
@@ -96,11 +96,11 @@
                             </td>
                             <td>
                                     <div class="form-group vertical">
-                                            <a [routerLink]="['/editUser']"><button class="btn btn-secondary">Update</button></a>
+                                            <a [routerLink]="['/editProject', project.projectId]"><button class="btn btn-secondary">Update</button></a>
                                         </div>
                                         <div class="form-group vertical">
-                                        <button class="btn btn-secondary" (click)="deleteUser(user)">Suspend</button>
-                                        </div>
+                                        <button class="btn btn-secondary">Suspend</button>
+                                        </div> 
                             </td>
                             <td> 
                                     &nbsp;&nbsp; 

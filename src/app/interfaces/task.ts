@@ -8,8 +8,8 @@ export class Task implements ITask {
   parentTask : IParentTask;
   taskName : string;
   priority : number;
-  startDate : string;
-  endDate : string;
+  startDate : Date;
+  endDate : Date;
   endTaskStatus : boolean
 
 
@@ -22,7 +22,7 @@ export interface ITask {
   parentTask : IParentTask;
   taskName : string;
   priority : number;
-  startDate : string;
-  endDate : string;
+  startDate : Date;
+  endDate : Date;
   endTaskStatus : boolean
 }

@@ -3,7 +3,7 @@ import { Task } from './task';
 export class Project implements IProject
 {
     projectId:number;
-    projectName:String; 
+    projectName:string; 
     startDate:Date;
     endDate:Date;
     priority:number;
@@ -12,7 +12,7 @@ export class Project implements IProject
 export interface IProject
 {
     projectId:number;
-    projectName:String;
+    projectName:string;
     startDate:Date;
     endDate:Date;
     priority:number;

@@ -21,7 +21,7 @@ export class AddtaskComponent implements OnInit {
 
   submitstatus : boolean=false;
   task: Task = new Task();
-  parentTask : IParentTask;
+  parentTask : IParentTask = new IParentTask(null,null);
   projectList : IProject[];
   errorMessage: String;
   parentList: IParentTask[];
@@ -89,12 +89,6 @@ export class AddtaskComponent implements OnInit {
           return str.projectName.toLowerCase().includes(term.toLowerCase());
         });
       }
-      this.taskService.getParentTask().subscribe
-    (
-      {
-        next: parents => this.parentList = parents,
-        error: err => this.errorMessage = err
-      });
       
   }
   searchParentTask(searchParentTerm : string)
@@ -141,8 +135,8 @@ export class AddtaskComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
           console.log(result);
-          this.user = result;
           if(result!=null){
+            this.user = result;
           this.searchUserTerm=this.user.firstName+" "+this.user.lastName;
           }
         });
@@ -156,8 +150,8 @@ export class AddtaskComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
           console.log(result);
-          this.project = result;
           if(result!=null){
+          this.project = result;
           this.searchProjectTerm=this.project.projectName;
           }
         });
@@ -171,8 +165,8 @@ export class AddtaskComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
           console.log('The dialog was closed');
           console.log(result);
-          this.parentTask = result;
           if(result!=null){
+          this.parentTask = result;
           this.searchParentTerm=this.parentTask.parentTask;
           }
         });

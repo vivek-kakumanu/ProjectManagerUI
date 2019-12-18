@@ -9,14 +9,11 @@ export class FilterdataPipe implements PipeTransform {
 
     if(!items) return [];
     if(!value) return items;
-    console.log(items[1]);
-    console.log(field);
-    console.log(value);
     let filterdata=[];
-  if(field == "parentTask")
+  if(field == "project")
   {
     return items.filter( str => {
-      return str[field].parentTask.toLowerCase().includes(value.toLowerCase());
+      return str[field].projectName.toLowerCase().includes(value.toLowerCase());
     });
   }
   else{

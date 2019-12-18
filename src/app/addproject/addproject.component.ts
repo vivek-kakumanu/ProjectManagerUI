@@ -93,8 +93,42 @@ export class AddprojectComponent implements OnInit {
         next: project => this.projectList = project,
         error: err => this.errorMessage = err
       });
+      this.project= new Project();
+      this.searchTerm="";
       }
     });
   }
 
+  sortByStartDate()
+  {
+    this.projectList.sort(sortByStartDate);
+  }
+  sortByEndDate()
+  {
+    this.projectList.sort(sortByEndDate);
+  }
+  sortByPriority()
+  {
+    this.projectList.sort(sortByPriority);
+  }
+  
 }
+function  sortByStartDate(s1 : Project, s2 : Project) 
+  {
+    if (s1.startDate > s2.startDate) return 1
+    else if (s1.startDate === s2.endDate) return 0
+    else return -1
+  }
+  function  sortByEndDate(s1 : Project, s2 : Project) 
+  {
+    if (s1.endDate > s2.endDate) return 1
+    else if (s1.endDate === s2.endDate) return 0
+    else return -1
+  }
+  function  sortByPriority(s1 : Project, s2 : Project) 
+  {
+    if (s1.priority > s2.priority) return 1
+    else if (s1.priority === s2.priority) return 0
+    else return -1
+  }
+

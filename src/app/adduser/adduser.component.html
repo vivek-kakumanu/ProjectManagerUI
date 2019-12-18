@@ -35,20 +35,20 @@
  <div class="card">
     <div class="card-body" >
         <div class="form-group row">
-          <label for="user" class="col-sm-1 col-form-label">Search :</label>
+          <label for="user" class="col-sm-1 col-form-label">Search:</label>
           <div class="col-sm-2">
-            <input type="text" style="background-color: #eee" class="form-control" id="taskName" name="taskName" [(ngModel)]='_taskFilter'/>
+            <input type="text" style="background-color: #eee" class="form-control" id="project" name="project" [(ngModel)]='userfilter'/>
           </div>
       
           <label for="sort" class="col-sm-1 col-form-label">Sort:</label>
           <div class="col-sm-2">  
-            <button  class="btn btn-secondary">First Name</button>
+            <button  class="btn btn-secondary"(click)="sortByFirstName()">First Name</button>
             </div>
             <div class="col-sm-2">  
-            <button  class="btn btn-secondary">Last Name</button>
+            <button  class="btn btn-secondary" (click)="sortByLastName()">Last Name</button>
             </div>
             <div class="col-sm-1">  
-            <button  class="btn btn-secondary">Id</button>
+            <button  class="btn btn-secondary"(click)="sortById()">Id</button>
             </div>
       </div>
     </div>
@@ -56,7 +56,7 @@
 <div class='table-responsive'>
     <table class='table'>
             <tbody>
-                <tr *ngFor="let user of usersList">
+                <tr *ngFor="let user of usersList |filterdata:'firstName': userfilter">
                     <td >
                         <div class="card"  class="col-sm-6" >
                                 <div class="form-group vertical">
